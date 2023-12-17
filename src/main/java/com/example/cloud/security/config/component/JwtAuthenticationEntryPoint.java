@@ -1,4 +1,4 @@
-package com.example.diplom.component;
+package com.example.cloud.security.config.component;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

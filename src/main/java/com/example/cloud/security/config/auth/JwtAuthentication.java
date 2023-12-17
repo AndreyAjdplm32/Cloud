@@ -1,4 +1,4 @@
-package com.example.diplom.auth;
+package com.example.cloud.security.config.auth;
 
 import lombok.Data;
 import org.springframework.security.core.Authentication;

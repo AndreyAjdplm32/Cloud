@@ -1,2 +1,43 @@
-package com.example.cloud.service;public class AuthService {
+package com.example.cloud.service;
+
+
+import com.example.cloud.models.JwtRequest;
+import com.example.cloud.models.JwtResponse;
+import com.example.cloud.security.config.component.JwtProvider;
+import jakarta.security.auth.message.AuthException;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+
+@Service
+@RequiredArgsConstructor
+public class  AuthService {
+
+    private final AuthenticationManager authenticationManager;
+    private final UserService userService;
+    private final JwtProvider jwtProvider;
+
+
+@Transactional
+public JwtResponse login(@NonNull JwtRequest authRequest) throws AuthException {
+
+    final String username = authRequest.getLogin();
+    final String password = authRequest.getPassword();
+
+    Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    UserDetails userDetails = userService.loadUserByUsername(username);
+    String token = jwtProvider.generateToken(userDetails);
+    return new JwtResponse(token);
+}
+
+
 }

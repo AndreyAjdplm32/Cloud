@@ -1,54 +1,63 @@
-package com.example.cloud.controller;
+package com.example.cloud.controllers;
 
 import com.example.cloud.models.File;
+import com.example.cloud.models.JwtRequest;
+import com.example.cloud.service.AuthService;
 import com.example.cloud.service.FileStorageService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.security.auth.message.AuthException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
-@RestController("/cloud")
 
+
+@RestController
+@RequiredArgsConstructor
 public class CloudController {
-    public final FileStorageService fileStorageService;
 
-    public CloudController(FileStorageService fileStorageService) {
-        this.fileStorageService = fileStorageService;
 
+    private final FileStorageService fileStorageService;
+    private final AuthService authService;
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody final JwtRequest loginRequest) throws AuthException, JsonProcessingException {
+        authService.login(loginRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(authService.login(loginRequest));
     }
 
-
     @PostMapping("/file")
-
-    public ResponseEntity<String> saveFile(@RequestParam("file") MultipartFile multipartfile) throws IOException {
-        String response = fileStorageService.putFile(multipartfile);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+    public ResponseEntity<?> saveFile(@RequestBody MultipartFile multipartfile){
+         fileStorageService.putFile(multipartfile);
+         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/get")
-
-    public ResponseEntity<byte[]> getImage(@PathVariable String fileName) {
-        byte[] imageData = fileStorageService.getFile(fileName);
-        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(imageData);
+    public ResponseEntity<byte[]> get(@PathVariable String fileName) {
+        return ResponseEntity.ok().contentType(MediaType.MULTIPART_FORM_DATA).body(fileStorageService.getFile(fileName));
     }
 
-    @PostMapping("/delete")
-    public void deleteFile(String fileName) throws Exception {
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteFile(@PathVariable String fileName) {
         fileStorageService.deleteFile(fileName);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/list")
-    public List<File> fileList() {
-        return fileStorageService.getAllFiles();
+    public ResponseEntity<List<File>> fileList() {
+        List<File>list = fileStorageService.getAllFiles();
+        return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
     @PostMapping("/put")
-    public void edditFileName(String fileName, String newFileName) {
+    public ResponseEntity <File> editFileName(@RequestParam("filename") String fileName, String newFileName) {
         fileStorageService.editFileName(fileName, newFileName);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 

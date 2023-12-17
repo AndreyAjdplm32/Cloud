@@ -1,11 +1,37 @@
-package com.example.cloud.entity;
+package com.example.cloud.models;
 
-import jakarta.persistence.Entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
+
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Builder
+@Table (name = "files")
+
 public class File {
-    String filename;
-    String
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (nullable = false,unique = true)
+    private Long id;
+    @Column (nullable = false)
+    private String fileName;
+    @Column (nullable = false)
+    private String fileType;
+    @Column (nullable = false)
+    private String filePath;
+    @Column (nullable = false)
+    private byte [] fileSize;
+
+    @ManyToOne
+    private User user;
+
+
 }

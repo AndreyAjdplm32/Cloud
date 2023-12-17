@@ -1,8 +1,6 @@
-package com.example.services;
-
+package Service;
 
 import com.example.cloud.exceptions.RequestErrors;
-import com.example.cloud.exceptions.ServerErrors;
 import com.example.cloud.models.File;
 import com.example.cloud.models.User;
 import com.example.cloud.repository.FileStorageRepository;
@@ -10,12 +8,8 @@ import com.example.cloud.service.FileStorageService;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -29,8 +23,6 @@ import static org.mockito.Mockito.when;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 @SpringBootTest(classes = FileStorageService.class)
-@ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
 class FileServiceTest {
 
     @Mock

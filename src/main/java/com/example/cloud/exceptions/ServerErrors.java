@@ -1,7 +1,7 @@
 package com.example.cloud.exceptions;
 
 
-public class ErrorUploadFileException extends RuntimeException {
+public class ServerErrors extends RuntimeException {
 
-    public ErrorUploadFileException(String message){super(message);}
+    public ServerErrors(String message){super(message);}
 }

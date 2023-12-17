@@ -1,4 +1,4 @@
-package com.example.diplom.providers;
+package com.example.cloud.security.config.component;
 
 
 import io.jsonwebtoken.Claims;

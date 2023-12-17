@@ -1,4 +1,4 @@
-package com.example.diplom.requests;
+package com.example.cloud.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +13,6 @@ import java.io.Serializable;
 public class JwtRequest implements Serializable {
     @Serial
     private static final long serialVersionUID = -1016818207995227591L;
-
     private String login;
     private String password;
 

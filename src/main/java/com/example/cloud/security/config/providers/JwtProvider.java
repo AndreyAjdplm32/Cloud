@@ -1,4 +1,4 @@
-package com.example.diplom.providers;
+package com.example.cloud.security.config.providers;
 
 
 import io.jsonwebtoken.Claims;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-@Component
+@Component("Provider")
 public class JwtProvider implements Serializable {
 
     @Serial

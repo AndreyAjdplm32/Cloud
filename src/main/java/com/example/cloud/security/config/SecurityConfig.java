@@ -1,8 +1,8 @@
-package com.example.diplom.config;
+package com.example.cloud.security.config;
 
-import com.example.diplom.component.JwtAuthenticationEntryPoint;
-import com.example.diplom.filter.JwtFilter;
-import com.example.diplom.services.UserService;
+import com.example.cloud.security.config.component.JwtAuthenticationEntryPoint;
+import com.example.cloud.security.config.component.JwtFilter;
+import com.example.cloud.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -59,8 +59,6 @@ public class SecurityConfig {
 
                 .cors(corsConfigurer -> corsConfigurer.configure(http))
                 .csrf(AbstractHttpConfigurer::disable)
-
-
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

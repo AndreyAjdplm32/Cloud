@@ -1,4 +1,4 @@
-package com.example.diplom.responses;
+package com.example.cloud.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,7 @@
-package com.example.diplom.utils;
+package com.example.cloud.security.config.utils;
 
-import com.example.diplom.auth.JwtAuthentication;
+
+import com.example.cloud.security.config.auth.JwtAuthentication;
 import io.jsonwebtoken.Claims;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

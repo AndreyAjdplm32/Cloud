@@ -1,4 +1,4 @@
-package com.example.cloud;
+package com.example;
 
 
 import com.example.cloud.controllers.CloudController;

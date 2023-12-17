@@ -1,7 +1,7 @@
-package com.example.diplom.filter;
+package com.example.cloud.security.config.component;
 
-import com.example.diplom.providers.JwtProvider;
-import com.example.diplom.services.UserService;
+
+import com.example.cloud.service.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import jakarta.servlet.FilterChain;
@@ -33,7 +33,6 @@ public class JwtFilter extends OncePerRequestFilter {
         String authToken = null;
 
 
-
         if (header != null && header.startsWith("Bearer")) {
             authToken = header.substring(7);
             try {
@@ -42,7 +41,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 log.error("an error occurred during getting username from token", e);
             } catch (ExpiredJwtException e) {
                 log.warn("the token is expired and not valid anymore", e);
-            } catch(SignatureException e){
+            } catch (SignatureException e) {
                 log.error("Authentication Failed. Username or Password not valid.");
             }
         } else {
